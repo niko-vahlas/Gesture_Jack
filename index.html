@@ -1,0 +1,60 @@
+<!-- index.html -->
+<html>
+  <link
+    href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"
+    rel="stylesheet"
+  />
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"
+    crossorigin="anonymous"
+  ></script>
+  <head>
+    <title>GestureJack</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="logo"></div>
+        <h1>Welcome to GestureJack</h1>
+        <div>Balance: <span class="balance">4350</span></div>
+        <h2>Player's Hand</h2>
+        <div id="playerHand"></div>
+        <h2>Dealer's Hand</h2>
+        <div id="dealerHand"></div>
+        <button id="hitButton">Hit</button>
+        <button id="standButton">Stand</button>
+        <button id="newGameButton">New Game</button>
+        <div id="gameStatus"></div>
+
+        <div id="liveView" class="videoView">
+          <button id="webcamButton" class="mdc-button mdc-button--raised">
+            <span class="mdc-button__ripple"></span>
+            <span class="mdc-button__label">ENABLE WEBCAM</span>
+          </button>
+          <div style="position: relative; background-color: black">
+            <video
+              id="webcam"
+              style="position: absolute"
+              autoplay
+              playsinline
+            ></video>
+            <canvas
+              class="output_canvas"
+              id="output_canvas"
+              style="position: absolute; left: 0px; top: 0px"
+            ></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Link to JS file -->
+    <script type="module" src="ui.js"></script>
+    <script type="module" src="gestureDetection.js"></script>
+  </body>
+</html>
