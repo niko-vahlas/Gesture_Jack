@@ -38,24 +38,9 @@
           </div>
         </header>
 
-        <!-- Chips -->
-        <div class="chips-wrapper">
-          <ul class="chips">
-            <li class="chip" id="5-chip"></li>
-            <li class="chip" id="10-chip"></li>
-            <li class="chip" id="20-chip"></li>
-            <li class="chip" id="50-chip"></li>
-            <li class="chip" id="100-chip"></li>
-          </ul>
-        </div>
-
         <!-- Cards -->
         <div class="playing-area">
-          <ul
-            class="cards"
-            id="dealer-cards
-            "
-          >
+          <ul class="cards" id="dealerHand">
             <li class="card">
               <img src="assets/cards/c10.gif" alt="Card 1" />
             </li>
@@ -64,7 +49,7 @@
             </li>
           </ul>
 
-          <ul class="cards" id="player-cards">
+          <ul class="cards" id="playerHand">
             <li class="card">
               <img src="assets/cards/c10.gif" alt="Card 1" />
             </li>
@@ -72,52 +57,65 @@
               <img src="assets/cards/c8.gif" alt="Card 2" />
             </li>
           </ul>
+        </div>
 
-          <div class="chip--container">
-            <div class="chip-place--wrapper">
-              <img src="assets/New Piskel.png" alt="Card 2" />
+        <div class="grid-container">
+          <div class="left-section">
+            <!-- Chips -->
+            <div class="chips-wrapper">
+              <ul class="chips">
+                <li class="chip" id="5-chip"></li>
+                <li class="chip" id="10-chip"></li>
+                <li class="chip" id="20-chip"></li>
+                <li class="chip" id="50-chip"></li>
+                <li class="chip" id="100-chip"></li>
+              </ul>
             </div>
           </div>
 
-          <div class="instructions--container">
-            <div class="instruction">
-              <button class="btn" id="hitButton">Hit</button>
-              <div class="instruction--text">Index</div>
+          <div class="middle-section">
+            <div class="chip--container">
+              <div class="chip-place--wrapper">
+                <img src="assets/New Piskel.png" alt="Card 2" />
+              </div>
             </div>
-            <div class="instruction">
-              <button class="btn" id="standButton">Stand</button>
-              <div class="instruction--text">All fingers</div>
+            <div class="instructions--container">
+              <div class="instruction">
+                <button class="btn" id="hitButton">Hit</button>
+                <div class="instruction--text">Index</div>
+              </div>
+              <div class="instruction">
+                <button class="btn" id="standButton">Stand</button>
+                <div class="instruction--text">All fingers</div>
+              </div>
+              <div class="instruction">
+                <button class="btn" id="newGameButton">New Game</button>
+                <div class="instruction--text">Middle and Index</div>
+              </div>
             </div>
-            <div class="instruction">
-              <button class="btn" id="newGameButton">New Game</button>
-              <div class="instruction--text">Middle and Index</div>
+          </div>
+          <div class="right-section">
+            <div id="liveView" class="videoView">
+              <button id="webcamButton" class="mdc-button mdc-button--raised">
+                <span class="mdc-button__ripple"></span>
+                <span class="mdc-button__label">ENABLE WEBCAM</span>
+              </button>
+              <div style="position: relative; background-color: black">
+                <video
+                  id="webcam"
+                  style="position: absolute"
+                  autoplay
+                  playsinline
+                ></video>
+                <canvas
+                  class="output_canvas"
+                  id="output_canvas"
+                  style="position: absolute; left: 0px; top: 0px"
+                ></canvas>
+              </div>
             </div>
           </div>
         </div>
-
-        <div id="liveView" class="videoView">
-          <button id="webcamButton" class="mdc-button mdc-button--raised">
-            <span class="mdc-button__ripple"></span>
-            <span class="mdc-button__label">ENABLE WEBCAM</span>
-          </button>
-          <div style="position: relative; background-color: black">
-            <video
-              id="webcam"
-              style="position: absolute"
-              autoplay
-              playsinline
-            ></video>
-            <canvas
-              class="output_canvas"
-              id="output_canvas"
-              style="position: absolute; left: 0px; top: 0px"
-            ></canvas>
-          </div>
-        </div>
-        <h2>Player's Hand</h2>
-        <div id="playerHand"></div>
-        <h2>Dealer's Hand</h2>
-        <div id="dealerHand"></div>
 
         <div id="gameStatus"></div>
       </div>

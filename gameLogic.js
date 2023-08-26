@@ -49,8 +49,10 @@ function calculateHandValue(hand) {
   return handVal;
 }
 
-// Reset deck, player hand, and dealer hand.
-// Deal initial cards.
+// Reset deck
+// Deal initial cards
+// Return true if player won
+// Return false if dealer won
 function startNewGame() {
   deck = [];
   playerHand = [];
