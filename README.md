@@ -19,7 +19,7 @@ Gesture Jack brings a unique blend of the classic game of Blackjack and modern g
 
 ## Usage
 
-It's simple and intuitive! Open the app and immerse yourself in the world of Blackjack. Your hand gestures guide your moves, making gameplay smooth and enjoyable.
+It's simple and intuitive! Open the app and immerse yourself in the world of Blackjack. Your hand gestures guide your moves, making gameplay smooth and enjoyable. Gesture Jack checks for a gesture every 2.5 seconds.
 
 ## Supported Gestures
 
