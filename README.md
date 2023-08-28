@@ -33,4 +33,4 @@ If you're enthusiastic about classic games and modern interfaces, we welcome you
 
 ## License
 
-[License Information - you can fill this in later, or simply state "All rights reserved" if you haven't decided yet.]
+All rights reserved
