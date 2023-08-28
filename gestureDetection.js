@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         drawLandmarks(canvasCtx, landmarks, { color: '#FF0000', lineWidth: 2 });
 
         const currentTime = performance.now();
-        if (currentTime - lastGestureTime < 4000) {
+        if (currentTime - lastGestureTime < 2500) {
           continue;
         }
 
