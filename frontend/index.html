@@ -1,0 +1,191 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gesture Jack</title>
+
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"
+      rel="stylesheet"
+    />
+
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <!-- Header -->
+        <header>
+          <div class="headerrow">
+            <h2 class="name">GestureJack</h2>
+            <div class="balance--wrapper">
+              Balance: $<span id="balance" class="balance">225</span>
+            </div>
+            <div class="header-btn-wrapper">
+              <button class="btn" id="loginBtn">Login</button>
+              <button class="btn" id="signupBtn">Sign Up</button>
+            </div>
+
+            <div class="popup" id="loginPopup">
+              <div class="popup-content">
+                <span class="close-btn">&times;</span>
+                <h2>Login</h2>
+                <form id="login-form">
+                  <input
+                    id="login-username"
+                    type="text"
+                    placeholder="Username"
+                    required
+                  />
+                  <input
+                    id="login-password"
+                    type="password"
+                    placeholder="Password"
+                    required
+                  />
+                  <input type="submit" value="Login" />
+                </form>
+              </div>
+            </div>
+
+            <div class="popup" id="signupPopup">
+              <div class="popup-content">
+                <span class="close-btn">&times;</span>
+                <h2>Sign Up</h2>
+                <form id="signup-form">
+                  <input
+                    id="signup-username"
+                    type="text"
+                    placeholder="Username"
+                    required
+                  />
+                  <input
+                    id="signup-password"
+                    type="password"
+                    placeholder="Password"
+                    required
+                  />
+                  <input type="submit" value="Sign Up" />
+                </form>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Cards -->
+        <div class="playing-area">
+          <ul class="cards" id="dealerHand">
+            <li class="card">
+              <img src="assets/cards/c10.gif" alt="Card 1" />
+            </li>
+            <li class="card">
+              <img src="assets/cards/c8.gif" alt="Card 2" />
+            </li>
+          </ul>
+
+          <ul class="cards" id="playerHand">
+            <li class="card">
+              <img src="assets/cards/c10.gif" alt="Card 1" />
+            </li>
+            <li class="card">
+              <img src="assets/cards/c8.gif" alt="Card 2" />
+            </li>
+          </ul>
+        </div>
+
+        <div class="grid-container">
+          <div class="left-section flex-container">
+            <div class="flex-spacer"></div>
+            <!-- Chips -->
+            <div class="chips-wrapper">
+              <ul class="chips">
+                <li class="chip" id="1-chip">
+                  <img src="assets/chips/1-chip.png" alt="1 Chip" />
+                </li>
+                <li class="chip" id="5-chip">
+                  <img src="assets/chips/5-chip.png" alt="5 Chip" />
+                </li>
+                <li class="chip" id="10-chip">
+                  <img src="assets/chips/10-chip.png" alt="10 Chip" />
+                </li>
+                <li class="chip" id="25-chip">
+                  <img src="assets/chips/25-chip.png" alt="25 Chip" />
+                </li>
+                <li class="chip" id="50-chip">
+                  <img src="assets/chips/50-chip.png" alt="50 Chip" />
+                </li>
+                <li class="chip" id="100-chip">
+                  <img src="assets/chips/100-chip.png" alt="100 Chip" />
+                </li>
+                <li class="chip" id="200-chip">
+                  <img src="assets/chips/200-chip.png" alt="200 Chip" />
+                </li>
+              </ul>
+            </div>
+
+            <!-- Spacer element to push gameStatus down -->
+            <div id="gameStatus"></div>
+          </div>
+
+          <div class="middle-section">
+            <div class="chip--container">
+              <div class="chip-place--wrapper">
+                <img src="assets/New Piskel.png" alt="Card 2" />
+              </div>
+            </div>
+            <div class="instructions--container">
+              <div class="instruction">
+                <button class="btn" id="hitButton">Hit</button>
+                <div class="instruction--text">Index</div>
+              </div>
+              <div class="instruction">
+                <button class="btn" id="standButton">Stand</button>
+                <div class="instruction--text">All fingers</div>
+              </div>
+              <div class="instruction">
+                <button class="btn" id="newGameButton">New Game</button>
+                <div class="instruction--text">Middle and Index</div>
+              </div>
+            </div>
+          </div>
+          <div class="right-section">
+            <div id="liveView" class="videoView">
+              <button id="webcamButton" class="mdc-button mdc-button--raised">
+                <span class="mdc-button__ripple"></span>
+                <span class="mdc-button__label">ENABLE WEBCAM</span>
+              </button>
+              <div style="position: relative; background-color: black">
+                <video
+                  id="webcam"
+                  style="position: absolute"
+                  autoplay
+                  playsinline
+                ></video>
+                <canvas
+                  class="output_canvas"
+                  id="output_canvas"
+                  style="position: absolute; left: 0px; top: 0px"
+                ></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Link to JS file -->
+    <script type="module" src="./scripts/ui.js"></script>
+    <script type="module" src="./scripts/gestureDetection.js"></script>
+  </body>
+</html>

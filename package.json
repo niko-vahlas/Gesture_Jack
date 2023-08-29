@@ -1,0 +1,32 @@
+{
+  "name": "gesture_jack",
+  "version": "1.0.0",
+  "description": "Gesture Jack brings a unique blend of the classic game of Blackjack and modern gesture controls. Set in an engaging 8-bit design and powered by the MediaPipe API, players can now interact with the game in real-time using hand gestures. Experience Blackjack like never before!",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon backend/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niko-vahlas/Gesture_Jack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/niko-vahlas/Gesture_Jack/issues"
+  },
+  "homepage": "https://github.com/niko-vahlas/Gesture_Jack#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongodb": "^6.0.0",
+    "mongoose": "^7.4.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

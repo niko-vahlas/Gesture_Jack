@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+* {
+  font-family: 'Press Start 2P', cursive;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  color: #242424;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span {
+  text-align: center;
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+ul {
+  list-style: none;
+}
+
+body {
+  background-image: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%222%22%20height%3D%222%22%3E%3Crect%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23195e19%22%3E%3C%2Frect%3E%3Crect%20x%3D%221%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23195e19%22%3E%3C%2Frect%3E%3Crect%20x%3D%221%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%230F380F%22%3E%3C%2Frect%3E%3Crect%20x%3D%220%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%230F380F%22%3E%3C%2Frect%3E%3C%2Fsvg%3E');
+  background-size: 2px 2px;
+}
+
+.container {
+  padding: 50px 0;
+}
+
+.row {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+
+/* Header */
+
+.headerrow {
+  display: flex;
+  justify-content: space-between;
+}
+.logo--wrapper {
+  max-width: 50px;
+}
+
+.logo--wrapper img {
+  width: 100%;
+}
+
+/* Playing Area */
+
+.playing-area {
+  padding-top: 20px;
+}
+
+.cards {
+  padding-top: 80px;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  width: 40px;
+}
+
+.card img {
+  width: 100%;
+}
+
+.chip--container {
+  display: flex;
+  padding-top: 20px;
+  justify-content: center;
+}
+
+.chip-place--wrapper {
+  max-width: 140px;
+}
+
+.chip-place--wrapper img {
+  width: 100%;
+}
+
+.instructions--container {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+.instruction--text {
+  font-size: 10px;
+  padding-top: 10px;
+  text-align: center;
+}
+
+.instruction {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.btn {
+  padding: 10px;
+  margin: 20px;
+  color: #000;
+}
+
+/* Videoview */
+
+.videoView > div {
+  width: 320px; /* Set this to your desired width */
+  height: 240px; /* Set this to your desired height */
+  background-color: black;
+}
+
+#webcam,
+.output_canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
+  gap: 10px;
+  padding: 20px;
+}
+
+.chips {
+  display: flex;
+}
+
+.chip {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-size: cover;
+  margin: 5px;
+}
+
+.chip img {
+  height: 100%;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Adjust this if your left-section has a fixed height */
+}
+
+.flex-spacer {
+  flex: 1;
+}
+
+/*Popup windows*/
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup-content {
+  background-color: #ffffff;
+  padding: 20px;
+  width: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.close-btn {
+  cursor: pointer;
+  float: right;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.close-btn:hover {
+  color: red;
+}
