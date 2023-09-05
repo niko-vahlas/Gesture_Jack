@@ -81,6 +81,7 @@ function startNewGame() {
 
 //Deal a card to player
 //return true if player can hit again
+//Return false
 function playerHit() {
   playerHand.push(deck.pop());
   return calculateHandValue(playerHand) <= THRESHOLD;

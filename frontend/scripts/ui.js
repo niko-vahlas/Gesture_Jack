@@ -17,8 +17,14 @@ const newGameButton = document.getElementById('newGameButton');
 const gameStatusDiv = document.getElementById('gameStatus');
 const loginBtn = document.getElementById('loginBtn');
 const signupBtn = document.getElementById('signupBtn');
+const balanceElement = document.getElementById('balance');
+const chips = document.getElementById('chips');
+const closeLoginPopupBtn = document.querySelector('#loginPopup .close-btn');
+const closeSignupPopupBtn = document.querySelector('#signupPopup .close-btn');
+const betField = document.getElementById('overlay-bet');
+const chipsList = Array.from(chips.children);
+updateChips();
 let revealDealerHoleCard = false;
-
 hitButton.disabled = true;
 standButton.disabled = true;
 
@@ -29,8 +35,10 @@ hitButton.addEventListener('click', function () {
   if (!canUserHit) {
     hitButton.disabled = true;
     standButton.disabled = true;
+    newGameButton.disabled = false;
     updateGameStatus("You've busted! Game over.");
     revealDealerHoleCard = true;
+    setBet(0);
   }
   updateHandDisplay(playerHand, dealerHand);
 });
@@ -41,8 +49,18 @@ standButton.addEventListener('click', function () {
 
   if (dealerWon) {
     updateGameStatus('Dealer won!');
+    newGameButton.disabled = false;
+    setBet(0);
   } else {
     updateGameStatus('You won!');
+    newGameButton.disabled = false;
+    let bet = getBet();
+    bet = bet * 2;
+    let initialBalance = getBalance();
+    let newBalance = initialBalance + bet;
+    setBalance(newBalance);
+
+    //Increase balance by double bet amount
   }
   revealDealerHoleCard = true;
   updateHandDisplay(playerHand, dealerHand);
@@ -61,14 +79,23 @@ newGameButton.addEventListener('click', function () {
     revealDealerHoleCard = true;
     hitButton.disabled = true;
     standButton.disabled = true;
+    let bet = getBet();
+    bet = bet * 2;
+    let initialBalance = getBalance();
+    let newBalance = initialBalance + bet;
+    setBalance(newBalance);
+    setBet(0);
   } else if (result === false) {
     updateGameStatus('Dealer got Blackjack!');
     revealDealerHoleCard = true;
     hitButton.disabled = true;
     standButton.disabled = true;
+    setBet(0);
   } else {
     updateGameStatus('Play on!');
+    newGameButton.disabled = true;
   }
+  updateChips();
 
   updateHandDisplay(playerHand, dealerHand);
 });
@@ -110,11 +137,6 @@ function handToHTML(hand) {
     .join('');
 }
 
-function updateBalance(balance) {
-  const balanceElement = document.getElementById('balance');
-  balanceElement.textContent = `${balance}`;
-}
-
 function updateGameStatus(status) {
   gameStatusDiv.innerText = status;
 }
@@ -127,9 +149,6 @@ function closePopup(popupId) {
   document.getElementById(popupId).style.display = 'none';
 }
 
-const closeLoginPopupBtn = document.querySelector('#loginPopup .close-btn');
-const closeSignupPopupBtn = document.querySelector('#signupPopup .close-btn');
-
 closeLoginPopupBtn.addEventListener('click', () => {
   closePopup('loginPopup');
 });
@@ -138,18 +157,78 @@ closeSignupPopupBtn.addEventListener('click', () => {
   closePopup('signupPopup');
 });
 
-//Signup
-async function signup(username, password) {
+//Updates possible chip values for users balance
+function updateChips() {
+  const chipsList = Array.from(chips.children);
+  chipsList.forEach((li) => {
+    const id = li.id;
+    const numericPart = parseInt(id.match(/\d+/)[0], 10);
+    const balanceValue = getBalance();
+
+    if (balanceValue / numericPart >= 1) {
+      li.style.visibility = 'visible';
+    } else {
+      li.style.visibility = 'hidden';
+    }
+  });
+}
+
+chipsList.forEach((li) => {
+  li.addEventListener('click', () => {
+    if (newGameButton.disabled === false) {
+      // if newgame is enabled add the bet
+      const chipVal = parseInt(li.id.match(/\d+/)[0], 10);
+      const initialNumber = getBet();
+      setBet(initialNumber + chipVal);
+
+      let balance = getBalance();
+      let newVal = balance - chipVal;
+      setBalance(newVal);
+      updateChips();
+    }
+  });
+});
+
+function getBalance() {
+  return parseInt(balanceElement.textContent, 10);
+}
+
+function setBalance(balance) {
+  console.log(balance);
+  balanceElement.textContent = `${balance}`;
+  let username = localStorage.getItem('username');
+  if (username) {
+    console.log('in set balance loop');
+    updateBalanceOnServer(username, balance);
+  }
+}
+
+function getBet() {
+  let textContent = betField.textContent;
+  let bet = parseInt(textContent.match(/\d+/)[0], 10);
+  return bet;
+}
+
+function setBet(number) {
+  betField.textContent = `Bet: $${number}`;
+}
+
+//Login and Signup functionality
+async function signup(username, password, balance) {
   try {
     const response = await fetch('http://localhost:3000/api/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ username, password, balance }),
     });
 
     const data = await response.json();
+    if (response.ok) {
+      localStorage.setItem('username', username);
+      setBalance(balance);
+    }
     return data;
   } catch (error) {
     console.error('Signup error:', error);
@@ -168,7 +247,8 @@ async function login(username, password) {
 
     const data = await response.json();
     if (response.ok) {
-      updateBalance(data.balance);
+      setBalance(data.balance);
+      localStorage.setItem('username', username);
     }
     return data;
   } catch (error) {
@@ -182,11 +262,13 @@ signupForm.addEventListener('submit', async (e) => {
 
   const username = document.getElementById('signup-username').value;
   const password = document.getElementById('signup-password').value;
+  const balance = balanceElement.innerText;
 
-  const response = await signup(username, password);
+  console.log(balance);
+  const response = await signup(username, password, balance);
 
   if (response.message) {
-    updateGameStatus(response.message); // You can have a separate div for auth messages if you prefer
+    updateGameStatus(response.message);
   }
 });
 
@@ -202,9 +284,25 @@ loginForm.addEventListener('submit', async (e) => {
   if (response.message) {
     updateGameStatus(response.message);
   }
-
-  if (response.token) {
-    // If you are using JWT or similar, save it to use later.
-    localStorage.setItem('token', response.token);
-  }
 });
+
+async function updateBalanceOnServer(username, newBalance) {
+  try {
+    const response = await fetch('http://localhost:3000/api/update-balance', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, newBalance }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to update balance on server.');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error updating balance:', error);
+  }
+}

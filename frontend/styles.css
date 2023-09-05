@@ -83,7 +83,15 @@ body {
 }
 
 .chip-place--wrapper {
-  max-width: 140px;
+  max-width: 180px;
+  position: relative;
+}
+
+.overlay-bet {
+  position: absolute;
+  top: 45%;
+  left: 55%;
+  transform: translate(-50%, -50%);
 }
 
 .chip-place--wrapper img {
