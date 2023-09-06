@@ -187,7 +187,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
   }
 
   function handleNewGameGesture() {
-    const newGameEvent = new Event('click');
-    newGameButton.dispatchEvent(newGameEvent);
+    if (newGameButton.disabled != true) {
+      const newGameEvent = new Event('click');
+      newGameButton.dispatchEvent(newGameEvent);
+    }
   }
 });
