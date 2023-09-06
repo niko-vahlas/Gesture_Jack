@@ -194,9 +194,8 @@ function getBalance() {
 }
 
 function setBalance(balance) {
-  console.log(balance);
   balanceElement.textContent = `${balance}`;
-  let username = localStorage.getItem('username');
+  let username = sessionStorage.getItem('username');
   if (username) {
     console.log('in set balance loop');
     updateBalanceOnServer(username, balance);
@@ -226,8 +225,7 @@ async function signup(username, password, balance) {
 
     const data = await response.json();
     if (response.ok) {
-      localStorage.setItem('username', username);
-      setBalance(balance);
+      sessionStorage.setItem('username', username);
     }
     return data;
   } catch (error) {
@@ -248,7 +246,7 @@ async function login(username, password) {
     const data = await response.json();
     if (response.ok) {
       setBalance(data.balance);
-      localStorage.setItem('username', username);
+      sessionStorage.setItem('username', username);
     }
     return data;
   } catch (error) {
@@ -264,7 +262,6 @@ signupForm.addEventListener('submit', async (e) => {
   const password = document.getElementById('signup-password').value;
   const balance = balanceElement.innerText;
 
-  console.log(balance);
   const response = await signup(username, password, balance);
 
   if (response.message) {
