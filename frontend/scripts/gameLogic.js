@@ -113,4 +113,5 @@ export {
   determineWinner,
   playerHand,
   dealerHand,
+  calculateHandValue,
 };

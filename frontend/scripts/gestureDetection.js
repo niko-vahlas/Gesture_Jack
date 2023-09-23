@@ -52,7 +52,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
       enableWebcamButton.innerText = 'ENABLE PREDICTIONS';
     } else {
       webcamRunning = true;
-      enableWebcamButton.innerText = 'DISABLE PREDICTIONS';
+      let camButton = document.getElementById('webcamButton');
+      camButton.style.visibility = 'hidden';
     }
 
     const constraints = {
