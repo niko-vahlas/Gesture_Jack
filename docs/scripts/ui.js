@@ -215,13 +215,16 @@ function setBet(number) {
 //Login and Signup functionality
 async function signup(username, password, balance) {
   try {
-    const response = await fetch('http://localhost:3000/api/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password, balance }),
-    });
+    const response = await fetch(
+      'https://gesturejack-b5cc110cd682.herokuapp.com/api/signup',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password, balance }),
+      }
+    );
 
     const data = await response.json();
     if (response.ok) {
@@ -235,13 +238,16 @@ async function signup(username, password, balance) {
 
 async function login(username, password) {
   try {
-    const response = await fetch('http://localhost:3000/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password }),
-    });
+    const response = await fetch(
+      'https://gesturejack-b5cc110cd682.herokuapp.com/api/login',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      }
+    );
 
     const data = await response.json();
     if (response.ok) {
@@ -285,13 +291,16 @@ loginForm.addEventListener('submit', async (e) => {
 
 async function updateBalanceOnServer(username, newBalance) {
   try {
-    const response = await fetch('http://localhost:3000/api/update-balance', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, newBalance }),
-    });
+    const response = await fetch(
+      'https://gesturejack-b5cc110cd682.herokuapp.com/api/update-balance',
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, newBalance }),
+      }
+    );
 
     if (!response.ok) {
       throw new Error('Failed to update balance on server.');
