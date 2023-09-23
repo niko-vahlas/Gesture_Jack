@@ -4,7 +4,8 @@
   "description": "Gesture Jack brings a unique blend of the classic game of Blackjack and modern gesture controls. Set in an engaging 8-bit design and powered by the MediaPipe API, players can now interact with the game in real-time using hand gestures. Experience Blackjack like never before!",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon backend/server.js",
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js",
     "test": "jest"
   },
   "repository": {
