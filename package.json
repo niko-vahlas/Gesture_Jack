@@ -2,10 +2,10 @@
   "name": "gesture_jack",
   "version": "1.0.0",
   "description": "Gesture Jack brings a unique blend of the classic game of Blackjack and modern gesture controls. Set in an engaging 8-bit design and powered by the MediaPipe API, players can now interact with the game in real-time using hand gestures. Experience Blackjack like never before!",
-  "main": "server.js",
+  "main": "backend/server.js",
   "scripts": {
     "start": "node backend/server.js",
-    "dev": "nodemon backend/server.js",
+    "dev": "node backend/server.js",
     "test": "jest"
   },
   "repository": {
@@ -31,7 +31,6 @@
     "@babel/core": "^7.22.20",
     "@babel/preset-env": "^7.22.20",
     "babel-jest": "^29.7.0",
-    "jest": "^29.7.0",
-    "nodemon": "^3.0.1"
+    "jest": "^29.7.0"
   }
 }
