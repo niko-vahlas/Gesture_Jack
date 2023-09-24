@@ -1,6 +1,10 @@
 const connectDatabase = require('./config/database.js');
 const express = require('express');
-const cors = require('cors');
+const corsOptions = {
+  origin: 'https://niko-vahlas.github.io',
+  optionsSuccessStatus: 200,
+};
+
 const userRoutes = require('./routes/userRoutes.js');
 
 // Connect to Database
@@ -9,7 +13,7 @@ connectDatabase();
 const app = express();
 
 // Middlewares
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use('/api', userRoutes);
