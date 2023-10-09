@@ -1,5 +1,7 @@
 # Gesture Jack
 [niko-vahlas.github.io/Gesture_Jack/](https://niko-vahlas.github.io/Gesture_Jack/)
+
+
 Gesture Jack brings a unique blend of the classic game of Blackjack and modern gesture controls, now enhanced with backend features for user account management. Set in an engaging 8-bit design and powered by the MediaPipe API, players can now interact with the game in real-time using hand gestures.
 
 ## Table of Contents
