@@ -8,6 +8,7 @@ Gesture Jack brings a unique blend of the classic game of Blackjack and modern g
 
 - [Features](#features)
 - [Usage](#usage)
+- [Screenshots](#screenshots)
 - [Supported Gestures](#supported-gestures)
 - [Account Management](#account-management)
 - [Contributing](#contributing)
@@ -24,6 +25,10 @@ Gesture Jack brings a unique blend of the classic game of Blackjack and modern g
 ## Usage
 
 It's simple and intuitive! Open the app and immerse yourself in the world of Blackjack. Your hand gestures guide your moves, making gameplay smooth and enjoyable. Gesture Jack checks for a gesture every 2.5 seconds.
+
+## Screenshots
+
+![Screenshot 2023-09-08 at 10 08 13 AM](https://github.com/niko-vahlas/Gesture_Jack/assets/111840954/2cc7d7f5-7c3a-4f19-9f42-264ba5469be9)
 
 ## Supported Gestures
 
