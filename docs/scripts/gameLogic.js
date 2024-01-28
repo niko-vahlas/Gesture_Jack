@@ -32,6 +32,7 @@ function shuffleDeck() {
     deck[i] = deck[randomIndex];
     deck[randomIndex] = temp;
   }
+  console.log('shuffled\n');
 }
 
 // Pop a card from the deck and push it to the specified hand.
@@ -71,6 +72,7 @@ function startNewGame() {
   dealCard(dealerHand);
   dealCard(playerHand);
   dealCard(dealerHand);
+  console.log(deck.length);
 
   if (calculateHandValue(playerHand) === 21) {
     return true;
@@ -81,7 +83,7 @@ function startNewGame() {
 
 //Deal a card to player
 //return true if player can hit again
-//Return false
+//Return false if not
 function playerHit() {
   playerHand.push(deck.pop());
   return calculateHandValue(playerHand) <= THRESHOLD;
@@ -106,12 +108,39 @@ function determineWinner() {
   return dealerValue >= playerValue;
 }
 
+function getDeck() {
+  return deck;
+}
+
+function getPlayerHand() {
+  return playerHand;
+}
+
+function getDealerHand() {
+  return dealerHand;
+}
+
+function setPlayerHand(newHand) {
+  playerHand = newHand;
+}
+
+function setDealerHand(newHand) {
+  dealerHand = newHand;
+}
+
 export {
+  shuffleDeck,
+  dealCard,
+  calculateHandValue,
   startNewGame,
   playerHit,
   dealerTurn,
   determineWinner,
-  playerHand,
+  getDeck,
+  getDealerHand,
+  getPlayerHand,
+  setDealerHand,
+  setPlayerHand,
   dealerHand,
-  calculateHandValue,
+  playerHand,
 };

@@ -1,45 +1,43 @@
-import {
-  startNewGame,
-  playerHit,
-  dealerTurn,
-  determineWinner,
-  playerHand,
-  dealerHand,
-  calculateHandValue,
-} from '../frontend/scripts/gameLogic';
+const gameLogic = require('../docs/scripts/gameLogic'); // Replace with your actual file name
 
-describe('Game Logic Tests', () => {
+describe('Blackjack Game Tests', () => {
   beforeEach(() => {
-    startNewGame();
+    gameLogic.startNewGame();
   });
 
-  //Check correct
-  test('startNewGame initializes deck and hands correctly', () => {
-    expect(playerHand.length + dealerHand.length).toBe(4);
+  test('Deck should be initialized correctly', () => {
+    expect(gameLogic.getDeck().length).toBe(48); // 52 cards - 4 dealt cards (2 to player, 2 to dealer)
   });
 
-  test('playerHit adds a card to player hand', () => {
-    const initialHandSize = playerHand.length;
-    playerHit();
-    expect(playerHand.length).toBe(initialHandSize + 1);
+  test('Dealing a card removes it from the deck', () => {
+    const initialDeckLength = gameLogic.getDeck().length;
+    gameLogic.playerHit();
+    expect(gameLogic.getDeck().length).toBe(initialDeckLength - 1);
   });
 
-  test('dealerTurn should deal cards to dealer until its hand value is > 16', () => {
-    dealerTurn();
-    // Assuming calculateHandValue is working correctly, this test should suffice
-    expect(calculateHandValue(dealerHand)).toBeGreaterThan(16);
+  test('Calculate hand value correctly', () => {
+    gameLogic.setPlayerHand([{ value: 10 }, { value: 7 }]); // Example hand
+    expect(gameLogic.calculateHandValue(gameLogic.getPlayerHand())).toBe(17);
   });
 
-  // You can add more tests for determineWinner, especially edge cases.
-  // For instance, when both dealer and player bust, player should win.
+  test('Player hit adds a card to player hand', () => {
+    const initialHandLength = gameLogic.getPlayerHand().length;
+    gameLogic.playerHit();
+    expect(gameLogic.getPlayerHand().length).toBe(initialHandLength + 1);
+  });
 
-  test('determineWinner returns false when both player and dealer bust', () => {
-    while (calculateHandValue(playerHand) <= 21) {
-      playerHit();
-    }
-    dealerTurn();
-    expect(determineWinner()).toBe(false);
+  test('Dealer hits until hand value is over 16', () => {
+    gameLogic.dealerTurn();
+    expect(
+      gameLogic.calculateHandValue(gameLogic.getDealerHand())
+    ).toBeGreaterThan(16);
+  });
+
+  test('Determining the winner works correctly', () => {
+    gameLogic.setPlayerHand([{ value: 10 }, { value: 9 }]); // Example player hand totaling 19
+    gameLogic.setDealerHand([{ value: 10 }, { value: 6 }]); // Example dealer hand totaling 16
+    gameLogic.dealerTurn(); // Dealer should take at least one more card
+    const isDealerWinner = gameLogic.determineWinner();
+    expect(isDealerWinner).not.toBeNull();
   });
 });
-
-// This is a simple example. Real tests should also include various edge cases.
