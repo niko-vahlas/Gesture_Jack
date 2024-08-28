@@ -216,7 +216,7 @@ function setBet(number) {
 async function signup(username, password, balance) {
   try {
     const response = await fetch(
-      'http://159.203.2.197/api/signup',
+      'https://gesturejack-b5cc110cd682.herokuapp.com/api/signup',
       {
         method: 'POST',
         headers: {
@@ -239,7 +239,7 @@ async function signup(username, password, balance) {
 async function login(username, password) {
   try {
     const response = await fetch(
-      'http://159.203.2.197/api/login',
+      'https://gesturejack-b5cc110cd682.herokuapp.com/api/login',
       {
         method: 'POST',
         headers: {
@@ -292,7 +292,7 @@ loginForm.addEventListener('submit', async (e) => {
 async function updateBalanceOnServer(username, newBalance) {
   try {
     const response = await fetch(
-      'http://159.203.2.197/api/update-balance',
+      'https://gesturejack-b5cc110cd682.herokuapp.com/api/update-balance',
       {
         method: 'PUT',
         headers: {
